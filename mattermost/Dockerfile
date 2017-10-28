@@ -22,6 +22,6 @@ RUN apk upgrade --update \
 
 WORKDIR /usr/local/mattermost/bin
 
-EXPOSE 8065
+EXPOSE 80
 
 CMD ["./platform"]
