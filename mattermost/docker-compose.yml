@@ -42,7 +42,12 @@ services:
         max_attempts: 3
         window: 30s
     volumes:
-      - ./data/mysql/data:/var/lib/mysql
-      - ./data/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./data/mysql:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD
+      - TZ=Asia/Shanghai
+      - MYSQL_DATABASE=mattermost
+      - MYSQL_USER=mattermost
+      - MYSQL_PASSWORD=tsomrettam
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_CHARSET=utf8
+
