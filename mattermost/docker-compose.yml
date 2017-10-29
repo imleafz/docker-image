@@ -16,8 +16,19 @@ services:
         max_attempts: 3
         window: 30s
     volumes:
-      - ./data/mattermost/config.json:/usr/local/mattermost/config/config.json
-      - ./data/mattermost:/data/mattermost
+      - ./data/mattermost/config:/data/config
+      - ./data/mattermost/data:/data/data
+      - ./data/mattermost/logs:/data/logs
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - MM_USERNAME=mattermost
+      - MM_PASSWORD=tsomrettam
+      - MM_DBNAME=mattermost
+      - DB_HOST=db
+      - DB_PORT_NUMBER=3306
+      #- MM_CONFIG=/data/config/config.json
+      - MM_SQLSETTINGS_DRIVERNAME=mysql
+      - MM_SQLSETTINGS_DATASOURCE=MM_USERNAME:MM_PASSWORD@tcp(DB_HOST:DB_PORT_NUMBER)/MM_DBNAME?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s"
     networks:
       - net
       - web
@@ -26,7 +37,7 @@ services:
       - "traefik.docker.network=web"
       - "traefik.port=80"
       - "traefik.backend=mattermost"
-      - "traefik.frontend.rule=Host: xxx"
+      - "traefik.frontend.rule=Host: chat.leafz.net"
 
   db:
     image: mysql:latest
@@ -43,11 +54,18 @@ services:
         window: 30s
     volumes:
       - ./data/mysql:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro
     environment:
       - TZ=Asia/Shanghai
       - MYSQL_DATABASE=mattermost
       - MYSQL_USER=mattermost
       - MYSQL_PASSWORD=tsomrettam
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_CHARSET=utf8
+      - MYSQL_CHARSET=utf8mb4
+    networks:
+      - net
 
+networks:
+  net:
+  web:
+    external: true
