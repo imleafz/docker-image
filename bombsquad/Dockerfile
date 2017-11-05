@@ -6,7 +6,8 @@ ENV TZ ${TZ}
 ENV SERVIER_VERSION=1.4.125 
 
 RUN apt update \
-    && apt install tzdata axel python libsdl2-2.0-0 \
+    && apt install -y tzdata axel python python-sdl2 \
+    && apt clean \
     && axel -qn 20 http://www.files.froemling.net/bombsquad/builds/BombSquad_Server_Linux_64bit_${SERVER_VERSION}.tar.gz
     && tar -xzf BombSquad_*.tar.gz \
     && mv BombSquad_Server_Linux_64bit_${SERVER_VERSION} BombSquad \
