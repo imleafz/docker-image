@@ -1,7 +1,5 @@
 FROM alpine:latest
 
-LABEL maintainer="James Fang <imleafz@gmail.com>"
-
 ARG TZ="Asia/Shanghai"
 
 ENV TZ ${TZ} 
@@ -17,8 +15,7 @@ RUN apk upgrade --update \
     && ln -s /data /usr/local/mattermost/data \
     && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo ${TZ} > /etc/timezone \
-    && rm -rf mattermost-team-${MM_VERSION}-linux-amd64.tar.gz \
-            /var/cache/apk/*
+    && rm -rf /var/cache/apk/* mattermost-team-${MM_VERSION}-linux-amd64.tar.gz
 
 WORKDIR /usr/local/mattermost/bin
 

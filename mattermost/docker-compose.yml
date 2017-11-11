@@ -26,9 +26,9 @@ services:
       - MM_DBNAME=mattermost
       - DB_HOST=db
       - DB_PORT_NUMBER=3306
-      #- MM_CONFIG=/data/config/config.json
       - MM_SQLSETTINGS_DRIVERNAME=mysql
-      - MM_SQLSETTINGS_DATASOURCE=MM_USERNAME:MM_PASSWORD@tcp(DB_HOST:DB_PORT_NUMBER)/MM_DBNAME?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s"
+      - MM_SQLSETTINGS_DATASOURCE=MM_USERNAME:MM_PASSWORD@tcp(DB_HOST:DB_PORT_NUMBER)/MM_DBNAME?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s"'
+      #- MM_CONFIG=/data/config/config.json
     networks:
       - net
       - web
