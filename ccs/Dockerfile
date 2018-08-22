@@ -7,6 +7,7 @@ RUN apt-get update \
                        make gcc bzip2 libreadline-dev zlib1g-dev libkrb5-dev \
                        python-pip libffi-dev libffi6 memcached git python-xattr
 
+RUN mkdir -p /opt/ccs
 RUN git clone https://github.com/apple/ccs-calendarserver.git /opt/ccs
 WORKDIR /opt/ccs
 
